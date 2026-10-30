@@ -147,6 +147,8 @@ ol.steps2 label.dn input{width:20px;height:20px;accent-color:var(--ok)}
 .upl>div{border:2px solid var(--accent);border-radius:6px;padding:10px 14px}
 .upl b{font-family:var(--f-head);font-size:1.3rem;display:block}
 code.fn{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em;background:var(--bg);padding:1px 6px;border-radius:3px}
+.codecard{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;background:var(--yel-soft);border:2px solid var(--yel);border-radius:6px;padding:12px 16px;margin-bottom:12px}
+.bigcode{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:2.4rem;font-weight:800;letter-spacing:.12em;line-height:1.1}
 .modnav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:26px}
 footer{color:var(--muted);font-size:.82rem;padding-block:0 30px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -244,7 +246,8 @@ function renderTabs(){
   document.getElementById('tabs').replaceChildren(...items.map(([k,l,c])=>h('a',{href:'#'+k,'aria-current':v===k?'page':null},l,c?h('span',{class:'cnt'},c):null)));
 }
 function logos(){return h('div',{class:'logos'},h('img',{class:'lg-l',src:LOGO_L,alt:'Logo deinTechniklehrer'}),h('img',{class:'lg-d',src:LOGO_D,alt:''}));}
-const CT_URL='https://www.classtime.com/de/';
+const SESSION='DYVIX9';
+const CT_URL='https://www.classtime.com/code/'+SESSION;
 function vStart(){
   return h('div',null,
     h('div',{class:'intro'},h('div',null,h('h1',null,'Klassenarbeit Technik'),h('p',null,'Teil 1 zum 3D-Druck bearbeitest du in Classtime. In Teil 2 konstruierst du ein Werkstück in Solid Edge und gibst die Datei in IServ ab.')),logos()),
@@ -257,7 +260,7 @@ function vStart(){
         h('tfoot',null,h('tr',null,h('td',{colspan:'3'},'Gesamt'),h('td',{class:'p'},'41')))))),
     h('section',{class:'panel'},h('h2',null,'So gehst du vor'),
       h('ol',{class:'rules'},
-        h('li',null,['Öffne ',h('b',null,'Classtime'),' und gib den Session-Code ein, den deine Lehrkraft zeigt. Trage deinen Namen ein und bearbeite Teil 1.']),
+        h('li',null,['Öffne Teil 1 in ',h('b',null,'Classtime'),' (Session-Code ',h('b',null,SESSION),'), trage deinen Namen ein und bearbeite die Fragen.']),
         h('li',null,['Für Aufgabe 4a darfst du den Testwürfel von der ',h('a',{href:CARD_URL,target:'_blank',rel:'noopener'},'TechnikCard (bit.ly/technikcard)'),' herunterladen und in Cura öffnen.']),
         h('li',null,['Bearbeite Teil 2 am Computer in Solid Edge. Die Aufgaben findest du unter „Teil 2“. Das Solid-Edge-Tutorial auf der ',h('a',{href:CARD_URL,target:'_blank',rel:'noopener'},'TechnikCard'),' darfst du benutzen.']),
         h('li',null,['Gib am Ende Teil 1 in Classtime ab und lade deine Solid-Edge-Datei (.par) in die IServ-Aufgabe ',h('b',null,'„'+ISERV+'“'),' hoch.'])),
@@ -267,13 +270,13 @@ function vTeil1(){
   return h('div',null,
     h('div',{class:'intro'},h('div',null,h('h1',null,'Teil 1: 3D-Druck'),h('p',null,'In Classtime · 9 Fragen · 21 Punkte')),logos()),
     h('section',{class:'panel'},h('h2',null,'Classtime öffnen'),
+      h('div',{class:'codecard'},h('div',null,h('span',{class:'hint'},'Session-Code'),h('div',{class:'bigcode'},SESSION)),h('a',{class:'btn yel',href:CT_URL,target:'_blank',rel:'noopener'},'Teil 1 in Classtime starten')),
       h('ol',{class:'rules'},
-        h('li',null,['Öffne ',h('a',{href:CT_URL,target:'_blank',rel:'noopener'},'classtime.com'),' und tippe oben rechts in das Feld „Session Code“.']),
-        h('li',null,'Gib den Session-Code ein, den deine Lehrkraft an der Tafel zeigt, und tippe auf „Beitreten“.'),
+        h('li',null,'Tippe auf „Teil 1 in Classtime starten“. Der Session-Code ist dann schon eingetragen.'),
+        h('li',null,['Klappt der Link nicht: Öffne ',h('b',null,'classtime.com'),', tippe oben rechts in das Feld „Session Code“, gib ',h('b',null,SESSION),' ein und tippe auf „Beitreten“.']),
         h('li',null,'Trage deinen Vor- und Nachnamen ein, damit deine Antworten dir zugeordnet werden.'),
         h('li',null,'Beantworte alle Fragen. Schreibe ganze Sätze, wo eine Erklärung verlangt ist.'),
-        h('li',null,'Gib am Ende in Classtime ab. Danach kannst du nichts mehr ändern.')),
-      h('div',{class:'row',style:'margin-top:12px'},h('a',{class:'btn yel',href:CT_URL,target:'_blank',rel:'noopener'},'Classtime öffnen'))),
+        h('li',null,'Gib am Ende in Classtime ab. Danach kannst du nichts mehr ändern.'))),
     h('section',{class:'panel'},h('h2',null,'Diese Aufgaben erwarten dich'),
       h('div',{style:'overflow-x:auto'},h('table',{class:'parts'},
         h('thead',null,h('tr',null,h('th',null,'Nr.'),h('th',null,'Thema'),h('th',{class:'p'},'Punkte'))),
